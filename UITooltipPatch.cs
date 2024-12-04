@@ -55,33 +55,11 @@ namespace MaxStackHider
                     newText.text = quantities[0];
                     
                     //3 - Add max weight to tooltip
-                    string weight = "\nMax. quantity: <color=\"orange\">"+quantities[1]+"</color>"; //TODO Localize
+                    string weight = $"\n{ConfigurationFile.maxQuantityText.Value}: <color=\"orange\">"+quantities[1]+"</color>";
                     __instance.m_text = __instance.m_text.Replace("_description", "_description " + weight);
                     transform.GetComponent<TMP_Text>().text = Localization.instance.Localize(__instance.m_text);
-                    
-                    //TODO 4 - Empty labels from empty spaces
-                    Player.m_localPlayer.GetInventory();
                 }
             }
-        }
-    }
-
-    [HarmonyPatch(typeof(InventoryGui), "MoveToLowerInventoryGrid")]
-    public static class MoveToLowerInventoryGridPatch
-    {
-        public static void Postfix(InventoryGui __instance, Vector2i previousGridPosition)
-        {
-            Logger.Log("**MoveToLowerInventoryGrid");
-        }
-    }
-
-
-    [HarmonyPatch(typeof(InventoryGui), "MoveToUpperInventoryGrid")]
-    public static class MoveToUpperInventoryGridPatch
-    {
-        public static void Postfix(InventoryGui __instance, Vector2i previousGridPosition)
-        {
-            Logger.Log("**MoveToUpperInventoryGrid");
         }
     }
 }
