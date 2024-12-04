@@ -41,13 +41,13 @@ namespace MaxStackHider
                 if (__instance.GetName() == fromInventory.GetName())
                 {
                     //Move between same container
-                    updateInventoryStackNumbers(__instance, __instance.GetName() == "Inventory");
+                    _ = updateInventoryStackNumbersAwait(0.1f, __instance, __instance.GetName() == "Inventory");
                 }
                 else
                 {
                     //Move between different containers
-                    updateInventoryStackNumbers(__instance, __instance.GetName() == "Inventory");
-                    updateInventoryStackNumbers(fromInventory, fromInventory.GetName() == "Inventory");
+                    _ = updateInventoryStackNumbersAwait(0.1f, __instance, __instance.GetName() == "Inventory");
+                    _ = updateInventoryStackNumbersAwait(0.1f, fromInventory, fromInventory.GetName() == "Inventory");
                 }
                 
             }
