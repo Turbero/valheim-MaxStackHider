@@ -2,7 +2,7 @@
   "name": "MaxStackHider",
   "version_number": "1.0.0",
   "website_url": "https://github.com/Turbero/valheim-MaxStackHider",
-  "description": "Mod to move max stack to tooltips in inventory.",
+  "description": "Mod to move max stack to tooltips in inventory and leave only current stack value in inventory and container slots.",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2202"
   ]

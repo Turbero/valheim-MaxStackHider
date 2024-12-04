@@ -1,16 +1,16 @@
-# Valheim Profession Roleplay
-
-Showcase link: https://www.youtube.com/watch?v=
+# Max Stack Hider
 
 [ENG]
 
-The Max Stack Hider mod shows TBD
+The Max Stack Hider mod moves max stack to tooltips in inventory and leave only current stack value in inventory and container slots.
+
+![](https://i.imgur.com/o7xe9Gu.png)
 
 [ESP]
 
-El mod Max Stack Hider mod permite TBD
+El mod Max Stack Hider mod mueve la cantidad máxima de un stack de un objeto a su descripción en el tooltip y deja sólo el valor actual del stack en todas las ranuras de inventario y cofres.
 
-## Main features
+![](https://i.imgur.com/J1s2JHr.png)
 
 # About myself
 
@@ -42,11 +42,3 @@ O pregúntame en mis canales personales:
 
 * Turbeheim: https://discord.gg/JKQR3EWRbU
 * Más Turbero: https://discord.gg/y67YeVw62K
-
-[ENG]
-
-![]()
-
-[ESP]
-
-![]()
