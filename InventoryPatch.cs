@@ -7,27 +7,27 @@ using UnityEngine;
 
 namespace MaxStackHider
 {
-    /*[HarmonyPatch(typeof(Player), "OnInventoryChanged")]
-    public static class OnInventoryChangedPatch
-    {
-        public static void Postfix(Player __instance)
-        {
-            Logger.Log("**Player.OnInventoryChanged");
-        }
-    }*/
-
     public class InventoryPatch
     {
-
+        [HarmonyPatch(typeof(Inventory), "Changed")]
+        public static class InventoryChangedPatch
+        {
+            public static void Postfix(Inventory __instance)
+            {
+                Logger.Log("**Inventory.Changed");
+                _ = updateInventoryStackNumbersAwait(ConfigurationFile.delayRefreshNumbers.Value, __instance, __instance.GetName() == "Inventory");
+            }
+        }
+        
         [HarmonyPatch(typeof(InventoryGui), "Show")]
         public static class InventoryGuiShowPatch
         {
             public static void Postfix(InventoryGui __instance, Container container, int activeGroup = 1)
             {
                 Logger.Log("**InventoryGui.InventoryGuiShowPatch");
-                _ = updateInventoryStackNumbersAwait(0.1f, Player.m_localPlayer.GetInventory(), true);
+                _ = updateInventoryStackNumbersAwait(ConfigurationFile.delayRefreshNumbers.Value, Player.m_localPlayer.GetInventory(), true);
                 if (container != null)
-                    _ = updateInventoryStackNumbersAwait(0.1f, container.GetInventory(), false);
+                    _ = updateInventoryStackNumbersAwait(ConfigurationFile.delayRefreshNumbers.Value, container.GetInventory(), false);
             }
         }
 
@@ -41,27 +41,26 @@ namespace MaxStackHider
                 if (__instance.GetName() == fromInventory.GetName())
                 {
                     //Move between same container
-                    _ = updateInventoryStackNumbersAwait(0.1f, __instance, __instance.GetName() == "Inventory");
+                    _ = updateInventoryStackNumbersAwait(ConfigurationFile.delayRefreshNumbers.Value, __instance, __instance.GetName() == "Inventory");
                 }
                 else
                 {
                     //Move between different containers
-                    _ = updateInventoryStackNumbersAwait(0.1f, __instance, __instance.GetName() == "Inventory");
-                    _ = updateInventoryStackNumbersAwait(0.1f, fromInventory, fromInventory.GetName() == "Inventory");
+                    _ = updateInventoryStackNumbersAwait(ConfigurationFile.delayRefreshNumbers.Value, __instance, __instance.GetName() == "Inventory");
+                    _ = updateInventoryStackNumbersAwait(ConfigurationFile.delayRefreshNumbers.Value, fromInventory, fromInventory.GetName() == "Inventory");
                 }
                 
             }
         }
         
-        //private bool AddItem(ItemDrop.ItemData item, int amount, int x, int y)
-
-        private static async Task updateInventoryStackNumbersAwait(float seconds, Inventory inventory, bool isPlayerInventory)
+        // ReSharper disable Unity.PerformanceAnalysis
+        public static async Task updateInventoryStackNumbersAwait(float seconds, Inventory inventory, bool isPlayerInventory)
         {
             await Task.Delay((int)(Math.Max(0f, seconds) * 1000)); // to milisegundos
             updateInventoryStackNumbers(inventory, isPlayerInventory);
         }
 
-        private static void updateInventoryStackNumbers(Inventory inventory, bool isPlayerInventory)
+        public static void updateInventoryStackNumbers(Inventory inventory, bool isPlayerInventory)
         {
             Transform inventoryRoot = isPlayerInventory
                 ? InventoryGui.instance.transform.Find("root/Player/PlayerGrid/Root")
@@ -115,11 +114,6 @@ namespace MaxStackHider
                 newText.font = transformAmount.GetComponent<TextMeshProUGUI>().font;
                 newText.fontMaterial = transformAmount.GetComponent<TextMeshProUGUI>().fontMaterial;
             }
-        }
-
-        private static void updateChestInventoryStackNumbers(Inventory inventory)
-        {
-            
         }
     }
 }

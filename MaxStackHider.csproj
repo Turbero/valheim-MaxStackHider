@@ -64,6 +64,9 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\Libs\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>..\..\..\Libs\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\..\..\Libs\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -74,6 +77,7 @@
   <ItemGroup>
     <Compile Include="ConfigurationFile.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="LoggerEmptyPatch.cs" />
     <Compile Include="MaxStackHider.cs" />
     <Compile Include="InventoryPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

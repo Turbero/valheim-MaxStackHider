@@ -8,6 +8,7 @@ namespace MaxStackHider
     {
         public static ConfigEntry<bool> debug;
         public static ConfigEntry<string> maxQuantityText;
+        public static ConfigEntry<float> delayRefreshNumbers;
 
         private static ConfigFile configFile;
         private static string ConfigFileName = MaxStackHider.GUID + ".cfg";
@@ -19,7 +20,8 @@ namespace MaxStackHider
                 configFile = plugin.Config;
 
                 debug = configFile.Bind("1 - General", "DebugMode", false, "Enabling/Disabling the debugging in the console (default = false)");
-                maxQuantityText = configFile.Bind("2 - Language", "MaxQuantityText", "Max. Quantity", "Translated text to display in tooltip for -Max. quantity-");
+                delayRefreshNumbers = configFile.Bind("1 - General", "DelayRefreshNumbers", 0.05f, "Necessary forced delay to refresh stack numbers. Only change under your own risk (default = 0.1f)");
+                maxQuantityText = configFile.Bind("2 - Language", "MaxQuantityText", "Max Stack Size", "Translated text to display in tooltip for Max Stack Size");
                 SetupWatcher();
             }
         }
