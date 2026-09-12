@@ -1,11 +1,9 @@
-using System.Reflection;
 using HarmonyLib;
-using TMPro;
-using UnityEngine;
 
 namespace MaxStackHider
 {
     [HarmonyPatch(typeof(InventoryGrid), "CreateItemTooltip")]
+    [HarmonyPriority(Priority.Last)]
     public static class UITooltipPatch
     {
         public static bool Prefix(InventoryGrid __instance, ItemDrop.ItemData item, UITooltip tooltip)
