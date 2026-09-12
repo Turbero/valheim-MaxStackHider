@@ -56,7 +56,7 @@ namespace MaxStackHider
         // ReSharper disable Unity.PerformanceAnalysis
         public static async Task updateInventoryStackNumbersAwait(float seconds, Inventory inventory, bool isPlayerInventory)
         {
-            await Task.Delay((int)(Math.Max(0f, seconds) * 1000)); // to milisegundos
+            await Task.Delay((int)(Math.Max(0f, seconds) * 1000)); // to milliseconds
             updateInventoryStackNumbers(inventory, isPlayerInventory);
         }
 
@@ -64,7 +64,7 @@ namespace MaxStackHider
         {
             Transform inventoryRoot = isPlayerInventory
                 ? InventoryGui.instance.transform.Find("root/Player/PlayerGrid/Root")
-                : InventoryGui.instance.transform.Find("root/Container/ContainerGrid/Root");
+                : InventoryGui.instance.transform.Find("root/Player/Container/ContainerGrid/Root");
             if (inventoryRoot.GetChild(0) == null) return; //Not initialized yet
             
             int totalColumns = (int)typeof(Inventory).GetField("m_width", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(inventory);
